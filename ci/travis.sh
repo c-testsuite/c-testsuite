@@ -51,3 +51,15 @@ cat <<EOF >> ./output_html/index.html
 </body>
 </html>
 EOF
+
+
+set +x
+echo $DEPLOY_SSH_KEY > deploy_key
+set -x
+export GIT_SSH_COMMAND="ssh -i $(pwd)/deploy_key"
+cd ./output_html
+git init
+git remote add origin git@github.com:c-testsuite/c-testsuite.github.io.git
+git add *
+git commit -m "automated commit" -a
+git push -f
