@@ -35,3 +35,13 @@ allows for emulators and other configuration.
 ### Example:
 
 ```$ ./simple-exec 9cc ```
+
+
+# Skipping tests
+
+Only skip a test if your compiler platform can NEVER pass it, the test is not appropriate.
+In that case, there is only one mechanism, add the test as a single line to the file:
+
+```
+/runners/*/$COMPILER.skip
+```

@@ -1,0 +1,36 @@
+#! /usr/bin/env bash
+
+set -e
+set -u
+
+if ! test -f README.md
+then
+    echo "run from the base directory." >&2
+    exit 1
+fi
+
+testsuite="$1"
+compiler="$2"
+testcase="$3"
+
+# Only skip a test if this script returns 0
+
+skipfile="./runners/$testsuite/$compiler.skip"
+
+if ! test -f "$skipfile"
+then
+    exit 1
+fi
+
+# Super slow, we should use bsearch or something.
+# We control the test names though so they shouldn't 
+# be too string for now.
+for t in $(cat $skipfile)
+do
+    if test "$t" = "$testcase"
+    then
+        exit 0
+    fi
+done
+
+exit 1

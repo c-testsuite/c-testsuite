@@ -25,6 +25,13 @@ runner="./runners/simple-exec/$compiler"
 for t in $testdir/*.c
 do
     result="ok"
+
+    if ./scripts/shouldskip simple-exec "$compiler" "$t"
+    then
+        echo "ok $t # SKIP"
+        continue
+    fi
+
     if ! timeout 5m $runner $t > $scratchdir/t.out 2>&1
     then
         result="not ok"
