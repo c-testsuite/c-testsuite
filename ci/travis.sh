@@ -33,16 +33,11 @@ cd ..
 (cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
 
 
-# Setup tcc
-echo "tcc --version" > tcc_version.txt
+tcc -version > tcc_version.txt
 
-# Setup gcc
-# XXX parse gcc --version shitshow
-echo "gcc --version" > gcc_version.txt
+gcc --version > gcc_version.txt
 
-# Setup clang
-# XXX parse clang --version shitshow
-echo "clang --version" > clang_version.txt
+clang --version > clang_version.txt
 
 # Run tests for each, generating html
 test -d && rm -rf ./output_html
@@ -87,6 +82,13 @@ do
 EOF
 
     echo "<h2>$compiler</h2>" >> "$htmlfile"
+    echo "<br>" >> "$htmlfile"
+    echo "$compiler version:" >> "$htmlfile"
+    echo "<br>" >> "$htmlfile"
+    cat "${compiler}_version.txt" | ./scripts/htmlescape >> "$htmlfile"
+    echo "<br>" >> "$htmlfile"
+    echo "test date: $testrundate" >> "$htmlfile"
+
 
     for testsuite in simple-exec
     do
@@ -105,12 +107,6 @@ EOF
         echo "<a href=\"/${testrunname}_report.tap\">raw TAP data</a> <a href=\"/${testrunname}_report.tap.txt\">(.txt)</a>" >> "$htmlfile"
         echo "<br>" >> "$htmlfile"
     done
-    echo "test date: $testrundate" >> "$htmlfile"
-    echo "<br>" >> "$htmlfile"
-    echo "$compiler version:" >> "$htmlfile"
-    echo "<br>" >> "$htmlfile"
-    cat "${compiler}_version.txt" | ./scripts/htmlescape >> "$htmlfile"
-    echo "<br>" >> "$htmlfile"
     cat <<EOF >> "$htmlfile"
     </body>
     </html>
