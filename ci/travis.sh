@@ -29,7 +29,7 @@ if ! make
 then
     echo "warning, 9cc build failed"
 fi
-export PATH=$PATH:"$(pwd)"
+export PATH="$(pwd)":$PATH
 cd ..
 
 results9cc="$scratchdir"/9cc-simple-exec-"$testrundate"-"$commit9cc".tap

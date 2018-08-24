@@ -7,7 +7,7 @@ t=$1
 
 set -x
 
-if ! 9cc "$t" > "$t.s"
+if ! valgrind --leak-check=no -q 9cc "$t" > "$t.s"
 then
     exit 1
 fi
