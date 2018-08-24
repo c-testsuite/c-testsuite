@@ -35,9 +35,9 @@ cd ..
 
 tcc -version > tcc_version.txt
 
-gcc --version > gcc_version.txt
+gcc --version | head -n 1 > gcc_version.txt
 
-clang --version > clang_version.txt
+clang --version | head -n 1 > clang_version.txt
 
 # Run tests for each, generating html
 test -d && rm -rf ./output_html
