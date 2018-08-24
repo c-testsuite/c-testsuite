@@ -63,3 +63,4 @@ In that case, there is only one mechanism, add the test as a single line to the 
 - C reduce minimal test cases.
 - Remove naming tests at all, refer to them by shasum.
 - Have some sort of test fingerprinter to detect duplicate or similar tests.
+- Compiler code coverage hooks.
