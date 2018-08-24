@@ -36,7 +36,8 @@ testrunname="9cc-simple-exec-$testrundate-$commit9cc.tap"
 results9cc="$scratchdir/$testrunname"
 ./simple-exec 9cc | tee "$results9cc"
 
-test -d output_html || mkdir output_html
+test -d && rm -rf ./output_html
+mkdir output_html
 
 cat <<EOF > ./output_html/index.html
 <html>
@@ -44,8 +45,8 @@ cat <<EOF > ./output_html/index.html
 <body>
 EOF
 
-echo "<a href=\"/$testrunname\">$testrunname</a>" >> ./output_html/index.html
-cp $results9cc ./output_html/$testrunname
+echo "<a href=\"/$testrunname.txt\">$testrunname</a>" >> ./output_html/index.html
+cp $results9cc ./output_html/$testrunname.txt
 
 cat <<EOF >> ./output_html/index.html
 </body>
@@ -54,12 +55,13 @@ EOF
 
 
 set +x
-echo $DEPLOY_SSH_KEY > deploy_key
+umask 077
+gpg2 --batch --passphrase "$DEPLOY_SSH_KEY_PASSWORD" --decrypt ./ci/deploy_key.gpg > ./ci/deploy_key
 set -x
-export GIT_SSH_COMMAND="ssh -i $(pwd)/deploy_key"
+export GIT_SSH_COMMAND="ssh -i $(pwd)/ci/deploy_key"
 cd ./output_html
 git init
 git remote add origin git@github.com:c-testsuite/c-testsuite.github.io.git
 git add *
 git commit -m "automated commit" -a
-git push -f
+git push -f --set-upstream origin master
