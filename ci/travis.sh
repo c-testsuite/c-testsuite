@@ -41,6 +41,9 @@ cat <<EOF > ./output_html/index.html
 <header><title>ctest suite</title></header>
 <body>
 <h1>ctest-suite daily runner</h1>
+See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
+<br>
+<br>
 <a href="https://github.com/rui314/9cc">9cc</a>
 <a href="/9cc_latest.html">latest test results</a>
 <br>
