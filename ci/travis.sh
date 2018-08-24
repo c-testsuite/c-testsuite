@@ -78,7 +78,7 @@ EOF
         cp $results "./output_html/${testrunname}_latest.tap.txt"
         cp $results "./output_html/${testrunname}_latest.tap"
         echo "<pre>" >> "$htmlfile"
-        ./scripts/tapsummary < $results | ./scripts/htmlescape >> "$htmlfile"
+        ./scripts/tapsummary < "$results" | ./scripts/htmlescape >> "$htmlfile"
         echo "</pre>" >> "$htmlfile"
         echo "<br>" >> "$htmlfile"
         echo "<a href=\"/${testrunname}_latest.tap\">raw TAP data</a> <a href=\"/${testrunname}_latest.tap.txt\">(.txt)</a>" >> "$htmlfile"

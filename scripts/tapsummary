@@ -4,10 +4,13 @@ import sys
 
 tfailed=False
 
+buf=""
 def o(l):
-    print(l, end="")
+    global buf
+    buf+=l
 
 print("Test summary:")
+print("")
 
 ntests=None
 passed=0
@@ -33,5 +36,7 @@ if ntests is None:
 if ntests != passed+failed:
     raise Exception("%s tests did not report results"%(ntests-(passed+failed),))
 
-print("")
 print("passed %s/%s tests" % (passed, ntests))
+
+print("")
+print(buf)
