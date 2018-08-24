@@ -53,7 +53,8 @@ In that case, there is only one mechanism, add the test as a single line to the 
 - Split runners by arch and platform.
 - Add emulated runners.
 - Split tests by C standard somehow.
-
+- Add error tests, where the compiler is expected to fail.
+- Add zero dependency program test runners... programs like cat/sort/w.e. we can compile then stress test.
 
 # Maybe
 
