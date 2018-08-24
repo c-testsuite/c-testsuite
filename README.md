@@ -45,3 +45,16 @@ In that case, there is only one mechanism, add the test as a single line to the 
 ```
 /runners/*/$COMPILER.skip
 ```
+
+# TODO
+
+- Come up with a reliable installation and running method. The nix package manager or docker are good candidates.
+- Factor runners to reduce duplication.
+- Split runners by arch and platform.
+- Add emulated runners.
+- Split tests by C standard somehow.
+
+
+# Maybe
+
+- Come up with a test tagging system, and use it to generate skip lists automatically based on features.
