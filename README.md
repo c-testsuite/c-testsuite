@@ -54,9 +54,12 @@ In that case, there is only one mechanism, add the test as a single line to the 
 - Add emulated runners.
 - Split tests by C standard somehow.
 - Add error tests, where the compiler is expected to fail.
-- Add zero dependency program test runners... programs like cat/sort/w.e. we can compile then stress test.
+- Add zero dependency program test runners... programs like cat/sort/w.e. we can compile like cc *.c then stress test.
 - A csmith suite + runners, where the whole suite itself is generated randomly first.
 
 # Maybe
 
 - Come up with a test tagging system, and use it to generate skip lists automatically based on features.
+- C reduce minimal test cases.
+- Remove naming tests at all, refer to them by shasum.
+- Have some sort of test fingerprinter to detect duplicate or similar tests.
