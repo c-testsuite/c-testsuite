@@ -1,5 +1,7 @@
 # c-testsuite
-A public database of simple C compiler test cases, a minimal test runner, and public test results.
+A public database of simple C compiler test cases, minimal test runners, and public test results.
+
+results are published daily to https://c-testsuite.github.io/
 
 # runner
 
@@ -19,7 +21,7 @@ The drivers for simple-exec must live at ```runners/simple-exec/$COMPILER```
 The driver will be invoked as:
 
 ```
-$ ./runners/simple-exec/$COMPILER.sh test/simple-exec/case.c
+$ ./runners/simple-exec/$COMPILER test/simple-exec/case.c
 ```
 
 The runner is free to output any data it wants, but must return
