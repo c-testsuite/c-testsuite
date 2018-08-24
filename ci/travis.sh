@@ -65,8 +65,9 @@ do
     <header><title>c-test-suite</title></header>
     <body>
 EOF
-    echo "<h2>$testrunname</h2>" >> "$htmlfile"
-    echo "<a href=\"/${compiler}_latest.tap.txt\">$testrunname</a>" >> "$htmlfile"
+    echo "$compiler-$testrundate-$commit" >> "$htmlfile"
+    echo "<br>" >> "$htmlfile"
+    echo "<a href=\"/${compiler}_latest.tap.txt\">${compiler} raw results</a>" >> "$htmlfile"
     cp $results "./output_html/${compiler}_latest.tap.txt"
     cp $results "./output_html/${compiler}_latest.tap"
     echo "<pre>" >> "$htmlfile"
