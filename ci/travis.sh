@@ -68,7 +68,8 @@ do
 EOF
     echo "<h2>$testrunname</h2>" >> "$htmlfile"
     echo "<a href=\"/${compiler}_latest.tap.txt\">$testrunname</a>" >> "$htmlfile"
-    cp $results "./output_html/$testrunname.txt"
+    cp $results "./output_html/${compiler}_latest.tap.txt"
+    cp $results "./output_html/${compiler}_latest.tap"
     echo "<pre>" >> "$htmlfile"
     ./scripts/tapsummary < $results >> "$htmlfile"
     echo "</pre>" >> "$htmlfile"
