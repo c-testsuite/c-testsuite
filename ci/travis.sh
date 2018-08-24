@@ -44,8 +44,7 @@ cat <<EOF > ./output_html/index.html
 <a href="https://github.com/rui314/9cc">9cc</a>
 <a href="/9cc_latest.html">latest test results</a>
 <br>
-<a href="TODO">scc</a>
-<a href="/scc_latest.html">latest test results</a>
+
 <br>
 last updated: $testrundate
 </body>
