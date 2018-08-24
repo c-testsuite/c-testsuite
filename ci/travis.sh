@@ -58,16 +58,16 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <br>
 <br>
 <a href="https://github.com/rui314/9cc">9cc</a>
-<a href="/9cc_latest.html">latest test results</a>
+<a href="/9cc_report.html">test report</a>
 <br>
 <a href="http://gcc.gnu.org/">gcc</a>
-<a href="/gcc_latest.html">latest test results</a>
+<a href="/gcc_report.html">test report</a>
 <br>
 <a href="https://clang.llvm.org/">clang</a>
-<a href="/clang_latest.html">latest test results</a>
+<a href="/clang_report.html">test report</a>
 <br>
 <a href="https://clang.llvm.org/">tcc</a>
-<a href="/tcc_latest.html">latest test results</a>
+<a href="/tcc_report.html">test report</a>
 <br>
 
 <br>
@@ -78,7 +78,7 @@ EOF
 
 for compiler in 9cc gcc clang tcc
 do
-    htmlfile="./output_html/${compiler}_latest.html"
+    htmlfile="./output_html/${compiler}_report.html"
 
     cat <<EOF > "$htmlfile"
     <html>
@@ -96,13 +96,13 @@ EOF
 
         echo "<h3>$testsuite</h3>" >> "$htmlfile"
         echo "<br>" >> "$htmlfile"
-        cp $results "./output_html/${testrunname}_latest.tap.txt"
-        cp $results "./output_html/${testrunname}_latest.tap"
+        cp $results "./output_html/${testrunname}_report.tap.txt"
+        cp $results "./output_html/${testrunname}_report.tap"
         echo "<pre>" >> "$htmlfile"
         ./scripts/tapsummary < "$results" | ./scripts/htmlescape >> "$htmlfile"
         echo "</pre>" >> "$htmlfile"
         echo "<br>" >> "$htmlfile"
-        echo "<a href=\"/${testrunname}_latest.tap\">raw TAP data</a> <a href=\"/${testrunname}_latest.tap.txt\">(.txt)</a>" >> "$htmlfile"
+        echo "<a href=\"/${testrunname}_report.tap\">raw TAP data</a> <a href=\"/${testrunname}_report.tap.txt\">(.txt)</a>" >> "$htmlfile"
         echo "<br>" >> "$htmlfile"
     done
     echo "test date: $testrundate" >> "$htmlfile"
