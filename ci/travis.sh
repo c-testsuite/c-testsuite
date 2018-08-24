@@ -77,7 +77,7 @@ do
 
     cat <<EOF > "$htmlfile"
     <html>
-    <header><title>$compiler latest</title></header>
+    <header><title>$compiler report</title></header>
     <body>
 EOF
 
