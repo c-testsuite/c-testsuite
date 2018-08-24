@@ -83,6 +83,9 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <a href="https://clang.llvm.org/">clang</a>
 <a href="/clang_latest.html">latest test results</a>
 <br>
+<a href="https://clang.llvm.org/">tcc</a>
+<a href="/tcc_latest.html">latest test results</a>
+<br>
 
 <br>
 last updated: $testrundate
@@ -90,7 +93,7 @@ last updated: $testrundate
 </html>
 EOF
 
-for compiler in 9cc gcc clang
+for compiler in 9cc gcc clang tcc
 do
     version="$(cat ${compiler}_version.txt)"
     htmlfile="./output_html/${compiler}_latest.html"
