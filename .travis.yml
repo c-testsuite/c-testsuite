@@ -1,2 +1,4 @@
 language: c
 script: ./ci/travis.sh
+before_install:
+  - sudo apt-get install -y valgrind clang
