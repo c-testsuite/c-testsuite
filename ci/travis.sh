@@ -54,33 +54,43 @@ EOF
 for compiler in 9cc
 do
     commit="$(cd ${compiler}_git && git rev-parse HEAD)"
-    testrunname="$compiler-simple-exec-$testrundate-$commit.tap"
-    results="$scratchdir/$testrunname"
-    ./simple-exec 9cc | tee "$results"
-
     htmlfile="./output_html/${compiler}_latest.html"
 
     cat <<EOF > "$htmlfile"
     <html>
-    <header><title>c-test-suite</title></header>
+    <header><title>$compiler latest</title></header>
     <body>
 EOF
-    echo "$compiler-$testrundate-$commit" >> "$htmlfile"
-    echo "<br>" >> "$htmlfile"
-    echo "<a href=\"/${compiler}_latest.tap.txt\">${compiler} raw results</a>" >> "$htmlfile"
-    cp $results "./output_html/${compiler}_latest.tap.txt"
-    cp $results "./output_html/${compiler}_latest.tap"
-    echo "<pre>" >> "$htmlfile"
-    ./scripts/tapsummary < $results | ./scripts/htmlescape >> "$htmlfile"
-    echo "</pre>" >> "$htmlfile"
 
+    echo "<h2>$compiler</h2>" >> "$htmlfile"
+
+    for testsuite in simple-exec
+    do
+        testrunname="$compiler-$testsuite"
+        results="$scratchdir/$testrunname.tap"
+        ./$testsuite $compiler | tee "$results"
+
+        echo "<h3>$testsuite</h3>" >> "$htmlfile"
+        echo "<br>" >> "$htmlfile"
+        cp $results "./output_html/${testrunname}_latest.tap.txt"
+        cp $results "./output_html/${testrunname}_latest.tap"
+        echo "<pre>" >> "$htmlfile"
+        ./scripts/tapsummary < $results | ./scripts/htmlescape >> "$htmlfile"
+        echo "</pre>" >> "$htmlfile"
+        echo "<br>" >> "$htmlfile"
+        echo "<a href=\"/${testrunname}_latest.tap\">raw TAP data</a> <a href=\"/${testrunname}_latest.tap.txt\">(.txt)</a>" >> "$htmlfile"
+        echo "<br>" >> "$htmlfile"
+    done
+    echo "test date: $testrundate" >> "$htmlfile"
+    echo "<br>" >> "$htmlfile"
+    echo "$compiler version: $commit" >> "$htmlfile"
+    echo "<br>" >> "$htmlfile"
     cat <<EOF >> "$htmlfile"
     </body>
     </html>
 EOF
 
 done
-
 
 set +x
 umask 077
