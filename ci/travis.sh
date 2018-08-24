@@ -33,25 +33,8 @@ cd ..
 (cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
 
 
-# Get latest tcc version.
-if ! test -d tcc_git
-then
-    git clone --depth 20 git://repo.or.cz/tinycc.git tcc_git
-    cd tcc_git
-else
-    cd tcc_git
-    git fetch --all
-    git reset --hard origin/master
-fi
-
-git clean -fxd
-if ! (./configure && make)
-then
-    echo "warning, tcc build failed"
-fi
-export PATH="$(pwd)":$PATH
-cd ..
-(cd tcc_git && git rev-parse HEAD) > tcc_version.txt
+# Setup tcc
+echo "unspecified" > tcc_version.txt
 
 # Setup gcc
 # XXX parse gcc --version shitshow
