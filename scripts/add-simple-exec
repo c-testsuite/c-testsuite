@@ -12,7 +12,7 @@ fi
 in=$1
 name=$2
 
-if !test -f $in
+if ! test -f $in
 then
     echo "$in does not exist" >&2
     exit 1
