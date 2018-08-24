@@ -32,8 +32,8 @@ fi
 export PATH="$(pwd)":$PATH
 cd ..
 
-testrunname="9cc-simple-exec-$testrundate-$commit9cc.tap"
-results9cc="$scratchdir/$testrunname"
+testrunname9cc="9cc-simple-exec-$testrundate-$commit9cc.tap"
+results9cc="$scratchdir/$testrunname9cc"
 ./simple-exec 9cc | tee "$results9cc"
 
 test -d && rm -rf ./output_html
@@ -45,8 +45,11 @@ cat <<EOF > ./output_html/index.html
 <body>
 EOF
 
-echo "<a href=\"/$testrunname.txt\">$testrunname</a>" >> ./output_html/index.html
-cp $results9cc ./output_html/$testrunname.txt
+echo "<a href=\"/$testrunname9cc.txt\">$testrunname9cc</a>" >> ./output_html/index.html
+cp $results9cc ./output_html/$testrunname9cc.txt
+echo "<pre>" >> ./output_html/index.html
+./scripts/tapsummary < $results9cc >> ./output_html/index.html
+echo "</pre>" >> ./output_html/index.html
 
 cat <<EOF >> ./output_html/index.html
 </body>

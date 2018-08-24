@@ -1,0 +1,39 @@
+#! /usr/bin/env python3
+
+import html
+import sys
+
+tfailed=False
+
+def o(l):
+    print(html.escape(l), end="")
+
+print("Test summary:")
+print("")
+
+ntests=None
+passed=0
+failed=0
+for l in sys.stdin:
+    if l.startswith("not ok"):
+        o(l)
+        failed += 1
+        tfailed=True
+    elif l.startswith("ok"):
+        o(l)
+        passed += 1
+        tfailed=False
+    elif l.startswith('1..'):
+        ntests = int(l[3:])
+    elif l.startswith('#'):
+        if tfailed:
+            o('  '+l[1:])
+
+if ntests is None:
+    raise Exception("expected a 1..n line")
+
+if ntests != passed+failed:
+    raise Exception("%s tests did not report results"%(ntests-(passed+failed),))
+
+print("")
+print("passed %s/%s tests" % (passed, ntests))

@@ -18,7 +18,7 @@ cleanup () {
 trap cleanup EXIT
 
 echo "TAP version 13"
-echo "1..$(echo tests/simple-exec/*.c | wc -l)"
+echo "1..$(find ./tests/simple-exec/ -name "*.c" | wc -l)"
 
 testdir="./tests/simple-exec"
 runner="./runners/simple-exec/$compiler"
