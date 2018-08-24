@@ -1,0 +1,41 @@
+#! /usr/bin/env bash
+
+set -e
+set -u
+
+if ! test -f README.md
+then
+    echo "run from the base directory." >&2
+    exit 1
+fi
+
+in=$1
+name=$2
+
+if !test -f $in
+then
+    echo "$in does not exist" >&2
+    exit 1
+fi
+
+added="n"
+for n in $(seq 1000)
+do
+    paddedn=$(printf "%04d" "$n")
+    if (ls ./tests/simple-exec | grep -q "$paddedn-" )
+    then
+        continue
+    fi
+
+    chosenname="$paddedn-$name.c"
+    echo "added as $chosenname"
+    cat $in > ./tests/simple-exec/"$chosenname"
+    added="y"
+    break
+done
+
+if test "$added" = "n"
+then
+    echo "no numbers left."  >&2
+    exit 1
+fi
