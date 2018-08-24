@@ -5,6 +5,8 @@ set -u
 
 t=$1
 
+cat $t
+
 set -x
 
 if ! gcc "$t" -o "$t.bin"

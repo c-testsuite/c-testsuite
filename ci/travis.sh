@@ -32,9 +32,34 @@ export PATH="$(pwd)":$PATH
 cd ..
 (cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
 
+
+# Get latest tcc version.
+if ! test -d tcc_git
+then
+    git clone git://repo.or.cz/tinycc.git tcc_git
+    cd tcc_git
+else
+    cd tcc_git
+    git fetch --all
+    git reset --hard origin/master
+fi
+
+git clean -fxd
+if ! (./configure && make)
+then
+    echo "warning, tcc build failed"
+fi
+export PATH="$(pwd)":$PATH
+cd ..
+(cd tcc_git && git rev-parse HEAD) > tcc_version.txt
+
 # Setup gcc
 # XXX parse gcc --version shitshow
 echo "unspecified" > gcc_version.txt
+
+# Setup clang
+# XXX parse clang --version shitshow
+echo "unspecified" > clang_version.txt
 
 # Run tests for each, generating html
 test -d && rm -rf ./output_html
@@ -62,7 +87,7 @@ last updated: $testrundate
 </html>
 EOF
 
-for compiler in 9cc gcc
+for compiler in 9cc gcc clang
 do
     version="$(cat ${compiler}_version.txt)"
     htmlfile="./output_html/${compiler}_latest.html"
