@@ -32,6 +32,21 @@ fi
 export PATH="$(pwd)":$PATH
 cd ..
 
-results9cc="$scratchdir"/9cc-simple-exec-"$testrundate"-"$commit9cc".tap
+testrunname="9cc-simple-exec-"$testrundate"-"$commit9cc".tap"
+results9cc="$scratchdir/$testrunname"
 ./simple-exec 9cc | tee "$results9cc"
 
+test -d output_html || mkdir output_html
+cat <<EOF > ./output_html/index.hml
+<html>
+<header><title>c-test-suite</title></header>
+<body>
+EOF
+
+echo "$testrunname" >> ./output_html/index.html
+cp $results9cc ./output_html/$testrunname
+
+cat <<EOF >> ./output_html/index.hml
+</body>
+</html>
+EOF
