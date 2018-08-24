@@ -1,0 +1,6 @@
+#! /usr/bin/env python3
+
+import sys, html
+
+for l in sys.stdin:
+   print(html.escape(l))

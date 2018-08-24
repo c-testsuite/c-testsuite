@@ -1,12 +1,11 @@
 #! /usr/bin/env python3
 
-import html
 import sys
 
 tfailed=False
 
 def o(l):
-    print(html.escape(l), end="")
+    print(l, end="")
 
 print("Test summary:")
 print("")

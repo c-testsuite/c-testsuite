@@ -71,7 +71,7 @@ EOF
     cp $results "./output_html/${compiler}_latest.tap.txt"
     cp $results "./output_html/${compiler}_latest.tap"
     echo "<pre>" >> "$htmlfile"
-    ./scripts/tapsummary < $results >> "$htmlfile"
+    ./scripts/tapsummary < $results | ./scripts/htmlescape >> "$htmlfile"
     echo "</pre>" >> "$htmlfile"
 
     cat <<EOF >> "$htmlfile"
