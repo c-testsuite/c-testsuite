@@ -46,8 +46,8 @@ cat <<EOF > ./output_html/index.html
 <br>
 <a href="TODO">scc</a>
 <a href="/scc_latest.html">latest test results</a>
-last updated: $testrundate
 <br>
+last updated: $testrundate
 </body>
 </html>
 EOF
