@@ -32,7 +32,7 @@ fi
 export PATH="$(pwd)":$PATH
 cd ..
 
-testrunname="9cc-simple-exec-"$testrundate"-"$commit9cc".tap"
+testrunname="9cc-simple-exec-$testrundate-$commit9cc.tap"
 results9cc="$scratchdir/$testrunname"
 ./simple-exec 9cc | tee "$results9cc"
 
