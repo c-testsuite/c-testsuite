@@ -9,7 +9,7 @@ cat $t
 
 set -x
 
-if ! tcc "$t" -o "$t.bin"
+if ! valgrind --leak-check=no -q tcc "$t" -o "$t.bin"
 then
     exit 1
 fi
