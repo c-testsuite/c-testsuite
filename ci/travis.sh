@@ -109,7 +109,7 @@ EOF
     echo "<br>" >> "$htmlfile"
     echo "$compiler version:" >> "$htmlfile"
     echo "<br>" >> "$htmlfile"
-    $(cat ${compiler}_version.txt) | htmlescape >> "$htmlfile"
+    cat "${compiler}_version.txt" | ./scripts/htmlescape >> "$htmlfile"
     echo "<br>" >> "$htmlfile"
     cat <<EOF >> "$htmlfile"
     </body>
