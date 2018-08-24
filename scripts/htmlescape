@@ -3,4 +3,4 @@
 import sys, html
 
 for l in sys.stdin:
-   print(html.escape(l))
+   print(html.escape(l), end='')
