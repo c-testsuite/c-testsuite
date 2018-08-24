@@ -34,15 +34,15 @@ cd ..
 
 
 # Setup tcc
-echo "unspecified" > tcc_version.txt
+echo "tcc --version" > tcc_version.txt
 
 # Setup gcc
 # XXX parse gcc --version shitshow
-echo "unspecified" > gcc_version.txt
+echo "gcc --version" > gcc_version.txt
 
 # Setup clang
 # XXX parse clang --version shitshow
-echo "unspecified" > clang_version.txt
+echo "clang --version" > clang_version.txt
 
 # Run tests for each, generating html
 test -d && rm -rf ./output_html
@@ -78,7 +78,6 @@ EOF
 
 for compiler in 9cc gcc clang tcc
 do
-    version="$(cat ${compiler}_version.txt)"
     htmlfile="./output_html/${compiler}_latest.html"
 
     cat <<EOF > "$htmlfile"
@@ -108,7 +107,9 @@ EOF
     done
     echo "test date: $testrundate" >> "$htmlfile"
     echo "<br>" >> "$htmlfile"
-    echo "$compiler version: $version" >> "$htmlfile"
+    echo "$compiler version:" >> "$htmlfile"
+    echo "<br>" >> "$htmlfile"
+    $(cat ${compiler}_version.txt) | htmlescape >> "$htmlfile"
     echo "<br>" >> "$htmlfile"
     cat <<EOF >> "$htmlfile"
     </body>
