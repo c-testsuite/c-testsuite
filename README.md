@@ -3,11 +3,11 @@ A public database of simple C compiler test cases, minimal test runners, and pub
 
 results are published daily to https://c-testsuite.github.io/
 
-# runner
+# Runner
 
 The top level test-suite runners output https://testanything.org output.
 
-# test suites
+# Test suites
 
 ## tests/simple-exec/*
 
@@ -45,6 +45,12 @@ In that case, there is only one mechanism, add the test as a single line to the 
 ```
 /runners/*/$COMPILER.skip
 ```
+
+# Tips
+
+## Getting a summary from the command line
+
+./simple-exec gcc | ./scripts/tapsummary | head
 
 # TODO
 
