@@ -46,6 +46,7 @@ unset $(go env | cut  -f 1-1 -d'=')
 go env
 go get -v -u github.com/cznic/ccgo/v2/...
 go get -v -u github.com/cznic/crt
+export PATH=$HOME/go/bin:$PATH
 ccgo --version > ccgo_version.txt
 
 # install tcc
