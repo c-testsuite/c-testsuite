@@ -40,6 +40,7 @@ cd ..
 
 # install ccgo
 nix-env -i go
+go env
 go get -v -u github.com/cznic/ccgo/v2/...
 go get -v -u github.com/cznic/crt
 ccgo --version > ccgo_version.txt
