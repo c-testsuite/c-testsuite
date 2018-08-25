@@ -94,6 +94,9 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <a href="https://clang.llvm.org/">tcc</a>
 <a href="/tcc_report.html">test report</a>
 <br>
+<a href="http://compcert.inria.fr/">compcert</a>
+<a href="/compcert_report.html">test report</a>
+<br>
 
 <br>
 <a href="https://travis-ci.org/c-testsuite/c-testsuite">ci job history here</a>
