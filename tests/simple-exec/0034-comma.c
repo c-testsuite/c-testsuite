@@ -14,6 +14,7 @@ bar()
 	return 2;
 }
 
+int
 main()
 {
 	int v;
