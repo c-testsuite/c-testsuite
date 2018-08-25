@@ -91,7 +91,7 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <a href="http://gcc.gnu.org/">gcc</a>
 <a href="/gcc_report.html">test report</a>
 <br>
-<a href="https://clang.llvm.org/">tcc</a>
+<a href="https://bellard.org/tcc/">tcc</a>
 <a href="/tcc_report.html">test report</a>
 <br>
 <a href="http://compcert.inria.fr/">compcert</a>
