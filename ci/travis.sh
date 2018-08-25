@@ -44,15 +44,17 @@ go get -u github.com/cznic/ccgo/v2/...
 go get -u github.com/cznic/crt
 ccgo --version > ccgo_version.txt
 
-# install tcc - (currently via nix)
+# install tcc
 nix-env -i tcc
 tcc -version > tcc_version.txt
 
-# install gcc - (currently via nix)
- nix-env -i gcc
+# install gcc 
+# XXX this conflicts with clang
+# ideally each runner just gets its own nix environment
+# nix-env -i gcc
 gcc --version | head -n 1 > gcc_version.txt
 
-# install clang - (currently via nix)
+# install clang
 nix-env -i clang
 clang --version | head -n 1 > clang_version.txt
 
