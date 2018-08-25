@@ -20,7 +20,7 @@ The top level test-suite runners output https://testanything.org output.
 
 entry point is ```./simple-exec```
 
-### ./runners/simple-exec/*
+### runners/simple-exec/*
 
 The runner will be invoked as:
 
@@ -49,7 +49,7 @@ The runner will be considered a failure if it takes more than 5 minutes.
 
 entry point is ```./output-exec```
 
-### ./runners/output-exec/*
+### runners/output-exec/*
 
 The runner will be invoked as:
 
@@ -85,7 +85,7 @@ Only skip a test if your compiler platform can NEVER pass it, the test is not ap
 In that case, there is only one mechanism, add the test as a single line to the file:
 
 ```
-/runners/*/$COMPILER.skip
+./runners/*/$COMPILER.skip
 ```
 
 # Dependencies
