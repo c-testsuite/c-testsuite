@@ -1,0 +1,7 @@
+#! /bin/sh
+
+CC=ccomp
+CFLAGS="-O2"
+
+export CC CFLAGS
+exec ./runners/simple-exec/posix $1

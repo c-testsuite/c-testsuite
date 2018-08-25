@@ -53,6 +53,10 @@ export PATH=$HOME/go/bin:$PATH
 nix-env -i tcc
 tcc -version > tcc_version.txt
 
+# install compcert
+NIXPKGS_ALLOW_UNFREE=1  nix-env -i compcert
+ccomp --version > compcert_version.txt
+
 # install gcc 
 # ideally each runner just gets its own nix environment
 # XXX we just use what travis offers for now.
@@ -99,7 +103,7 @@ last updated: $testrundate
 </html>
 EOF
 
-for compiler in 9cc ccgo gcc clang tcc
+for compiler in 9cc ccgo gcc clang tcc compcert
 do
     htmlfile="./output_html/${compiler}_report.html"
 
