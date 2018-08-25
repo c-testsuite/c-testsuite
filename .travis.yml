@@ -4,3 +4,6 @@ sudo: required
 branches:
   only:
   - master
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y valgrind
