@@ -47,7 +47,7 @@ go env
 go get -v -u github.com/cznic/ccgo/v2/...
 go get -v -u github.com/cznic/crt
 export PATH=$HOME/go/bin:$PATH
-ccgo --version > ccgo_version.txt
+ccgo --version > ccgo_version.txt 2>&1
 
 # install tcc
 nix-env -i tcc
