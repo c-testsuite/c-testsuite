@@ -1,5 +1,13 @@
 # c-testsuite
-A public database of simple C compiler test cases, minimal test runners, and public test results.
+
+This project aims to be a collaborative database of C compiler test cases,
+minimal test runners, and public test results. The general idea is that
+the various test suites here adhere to well defined, simple interfaces and projects can contribute
+tests back that match those interfaces, or use those tests by implementing runner scripts matching
+the specifications.
+
+There are many tools that may benefit such as C compilers, transpilers, interpreters and emulators, so we should seek to agree on simple easy test interfaces, and implement
+those interfaces for a variety of tools.
 
 results are published daily to https://c-testsuite.github.io/
 
