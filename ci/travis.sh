@@ -38,6 +38,9 @@ export PATH="$(pwd)":$PATH
 cd ..
 (cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
 
+# valgrind is used by a few runners
+nix-env -i valgrind
+
 # install ccgo
 nix-env -i go
 # remove all the travis ci preset variables.
