@@ -8,7 +8,9 @@ testrundate="$(date +%Y-%m-%d)"
 
 if test "$TRAVIS" = "true"
 then
-    ./ci/install-nix.sh
+    curl https://nixos.org/nix/install | sh
+    . $(HOME)/.nix-profile/etc/profile.d/nix.sh
+    nix-env -i go clang gcc tcc
 fi
 
 scratchdir=$(mktemp -d)
@@ -43,16 +45,13 @@ go get -u github.com/cznic/ccgo/v2/...
 go get -u github.com/cznic/crt
 ccgo --version > ccgo_version.txt
 
-echo "XXX"
-exit 1
-
-# install tcc - (currently via travis)
+# install tcc - (currently via nix)
 tcc -version > tcc_version.txt
 
-# install fcc - (currently via travis)
+# install fcc - (currently via nix)
 gcc --version | head -n 1 > gcc_version.txt
 
-# install clang - (currently via travis)
+# install clang - (currently via nix)
 clang --version | head -n 1 > clang_version.txt
 
 # Run tests for each, generating html
