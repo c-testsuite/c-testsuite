@@ -10,7 +10,6 @@ if test "$TRAVIS" = "true"
 then
     curl https://nixos.org/nix/install | sh
     . "$HOME"/.nix-profile/etc/profile.d/nix.sh
-    nix-env -i go clang gcc tcc
 fi
 
 scratchdir=$(mktemp -d)
@@ -40,18 +39,21 @@ cd ..
 (cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
 
 # install ccgo
-
+nix-env -i go
 go get -u github.com/cznic/ccgo/v2/...
 go get -u github.com/cznic/crt
 ccgo --version > ccgo_version.txt
 
 # install tcc - (currently via nix)
+nix-env -i tcc
 tcc -version > tcc_version.txt
 
-# install fcc - (currently via nix)
+# install gcc - (currently via nix)
+ nix-env -i gcc
 gcc --version | head -n 1 > gcc_version.txt
 
 # install clang - (currently via nix)
+nix-env -i clang
 clang --version | head -n 1 > clang_version.txt
 
 # Run tests for each, generating html
