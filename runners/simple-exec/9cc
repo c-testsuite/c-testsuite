@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#! /bin/sh
 
 set -e
 set -u
@@ -9,7 +9,7 @@ cat $t
 
 set -x
 
-if ! valgrind --leak-check=no -q 9cc "$t" > "$t.s"
+if ! 9cc "$t" > "$t.s"
 then
     exit 1
 fi
