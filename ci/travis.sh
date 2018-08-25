@@ -63,11 +63,15 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <a href="https://github.com/rui314/9cc">9cc</a>
 <a href="/9cc_report.html">test report</a>
 <br>
-<a href="http://gcc.gnu.org/">gcc</a>
-<a href="/gcc_report.html">test report</a>
+<br>
+<a href="https://github.com/cznic/ccgo/tree/master/v2">ccgo</a>
+<a href="/ccgo_report.html">test report</a>
 <br>
 <a href="https://clang.llvm.org/">clang</a>
 <a href="/clang_report.html">test report</a>
+<br>
+<a href="http://gcc.gnu.org/">gcc</a>
+<a href="/gcc_report.html">test report</a>
 <br>
 <a href="https://clang.llvm.org/">tcc</a>
 <a href="/tcc_report.html">test report</a>
@@ -79,7 +83,7 @@ last updated: $testrundate
 </html>
 EOF
 
-for compiler in 9cc gcc clang tcc
+for compiler in 9cc ccgo gcc clang tcc
 do
     htmlfile="./output_html/${compiler}_report.html"
 
