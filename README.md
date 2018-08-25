@@ -60,6 +60,14 @@ In that case, there is only one mechanism, add the test as a single line to the 
 
 ./simple-exec gcc | ./scripts/tapsummary | head
 
+## The full TAP test suites report can be viewed or 'curl'ed
+
+https://c-testsuite.github.io/gcc_report.html
+https://c-testsuite.github.io/gcc-simple-exec_report.tap
+https://c-testsuite.github.io/gcc-simple-exec_report.tap.txt
+
+
+
 # TODO
 
 - Come up with a reliable installation and running method. The nix package manager or docker are good candidates.
