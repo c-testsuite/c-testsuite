@@ -9,7 +9,7 @@ testrundate="$(date +%Y-%m-%d)"
 if test "$TRAVIS" = "true"
 then
     curl https://nixos.org/nix/install | sh
-    . $(HOME)/.nix-profile/etc/profile.d/nix.sh
+    . "$HOME"/.nix-profile/etc/profile.d/nix.sh
     nix-env -i go clang gcc tcc
 fi
 
