@@ -79,7 +79,6 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <a href="https://github.com/rui314/9cc">9cc</a>
 <a href="/9cc_report.html">test report</a>
 <br>
-<br>
 <a href="https://github.com/cznic/ccgo/tree/master/v2">ccgo</a>
 <a href="/ccgo_report.html">test report</a>
 <br>
