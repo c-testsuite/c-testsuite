@@ -32,11 +32,19 @@ export PATH="$(pwd)":$PATH
 cd ..
 (cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
 
+# install ccgo
 
+go get -u github.com/cznic/ccgo/v2/...
+go get -u github.com/cznic/crt
+ccgo --version > ccgo_version.txt
+
+# install tcc - (currently via travis)
 tcc -version > tcc_version.txt
 
+# install fcc - (currently via travis)
 gcc --version | head -n 1 > gcc_version.txt
 
+# install clang - (currently via travis)
 clang --version | head -n 1 > clang_version.txt
 
 # Run tests for each, generating html
