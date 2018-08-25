@@ -54,13 +54,12 @@ nix-env -i tcc
 tcc -version > tcc_version.txt
 
 # install gcc 
-# XXX this conflicts with clang
 # ideally each runner just gets its own nix environment
-# nix-env -i gcc
+# XXX we just use what travis offers for now.
 gcc --version | head -n 1 > gcc_version.txt
 
 # install clang
-nix-env -i clang
+# XXX we just use what travis offers for now.
 clang --version | head -n 1 > clang_version.txt
 
 # Run tests for each, generating html
