@@ -16,6 +16,7 @@ print("")
 ntests=None
 passed=0
 failed=0
+skipped=0
 
 for l in sys.stdin:
     if l.startswith("not ok"):
@@ -23,8 +24,11 @@ for l in sys.stdin:
         failed += 1
         tfailed=True
     elif l.startswith("ok"):
+        if "# SKIP" in l:
+            skipped += 1
+        else:
+            passed += 1
         o(l)
-        passed += 1
         tfailed=False
     elif l.startswith('1..'):
         ntests = int(l[3:])
@@ -35,10 +39,15 @@ for l in sys.stdin:
 if ntests is None:
     raise Exception("expected a 1..n line")
 
-if ntests != passed+failed:
+if ntests != passed+failed+skipped:
     raise Exception("%s tests did not report results"%(ntests-(passed+failed),))
 
-print("passed %s/%s tests" % (passed, ntests))
+print("pass %d" % passed)
+print("fail %d" % failed)
+print("skip %d" % skipped)
+totalln = "total %d" % ntests
+print("-"*len(totalln))
+print(totalln)
 
 print("")
 buffered.seek(0)
