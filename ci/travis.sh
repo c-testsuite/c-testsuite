@@ -6,6 +6,11 @@ set -u
 
 testrundate="$(date +%Y-%m-%d)"
 
+if test "$TRAVIS" = "true"
+then
+    ./ci/install-nix.sh
+fi
+
 scratchdir=$(mktemp -d)
 cleanup () {
   rm -rf $scratchdir
