@@ -97,6 +97,12 @@ In that case, there is only one mechanism, add the test as a single line to the 
 
 # Tips
 
+## Naming test cases
+
+The names are not stable for now, so if you 
+refer to a test case in your issue tracker, it is best to 
+name it something like ``c-testsuite/$CTESTGITCOMMIT/path/to/test```.
+
 ## Getting a summary from the command line
 
 ./simple-exec gcc | ./scripts/tapsummary | head
