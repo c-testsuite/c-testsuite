@@ -33,15 +33,42 @@ nonzero on failure.
 
 The runner will be considered a failure if it takes more than 5 minutes.
 
-The runner is responsible for checking output and running the binary. This
-allows for emulators and other configuration.
-
 ### test files tests/simple-exec/*
 
 - Single .c file tests.
+- 'main' is the entry point.
 - These tests must not require a preprocessor.
-- They are linked against libc.
+- They are not linked against any libraries.
 - If the file $t.c.expected exists, stdout of test must match this.
+
+
+## output-exec suite
+
+entry point is ```./output-exec```
+
+### project specific test runners ./runners/output-exec/*
+
+The driver will be invoked as:
+
+```
+$ ./runners/output-exec/$NAME test/output-exec/case.c
+```
+
+The runner is free to output any data it wants, but must return
+nonzero on failure.
+
+The runner will be considered a failure if it takes more than 5 minutes.
+
+The runner is responsible for checking output and running the binary. This
+allows for emulators and other configuration.
+
+### test files tests/output-exec/*
+
+- Single .c file tests.
+- 'main' is the entry point.
+- These tests must not require a preprocessor.
+- They may use 'exit, abort, printf' calls.
+- If the file $t.c.expected exists, stdout+stderr of test must match this.
 
 
 ### Example:

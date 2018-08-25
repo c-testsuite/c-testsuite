@@ -1,0 +1,8 @@
+#! /bin/sh
+
+CC=ccgo
+# A typical configuration
+CFLAGS=""
+
+export CC CFLAGS
+exec ./runners/output-exec/posix $1

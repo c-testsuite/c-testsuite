@@ -122,7 +122,7 @@ EOF
     echo "test date: $testrundate" >> "$htmlfile"
 
 
-    for testsuite in simple-exec
+    for testsuite in simple-exec output-exec
     do
         testrunname="$compiler-$testsuite"
         results="$scratchdir/$testrunname.tap"
