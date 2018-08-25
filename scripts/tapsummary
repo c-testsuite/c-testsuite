@@ -1,13 +1,14 @@
 #! /usr/bin/env python3
 
 import sys
+import tempfile
 
 tfailed=False
 
-buf=""
+buffered=tempfile.TemporaryFile()
 def o(l):
-    global buf
-    buf+=l
+    global buffered
+    buffered.write(l.encode('utf-8'))
 
 print("Test summary:")
 print("")
@@ -15,6 +16,7 @@ print("")
 ntests=None
 passed=0
 failed=0
+
 for l in sys.stdin:
     if l.startswith("not ok"):
         o(l)
@@ -39,4 +41,11 @@ if ntests != passed+failed:
 print("passed %s/%s tests" % (passed, ntests))
 
 print("")
-print(buf)
+buffered.seek(0)
+while True:
+    buf = buffered.read(4096)
+    if len(buf) == 0:
+        break
+    sys.stdout.write(buf.decode('utf-8'))
+sys.stdout.flush()
+buffered.close()
