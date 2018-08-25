@@ -78,6 +78,8 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <br>
 
 <br>
+<a href="https://travis-ci.org/c-testsuite/c-testsuite">ci job history here</a>
+<br>
 last updated: $testrundate
 </body>
 </html>
