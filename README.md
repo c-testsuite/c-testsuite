@@ -11,25 +11,21 @@ those interfaces for a variety of tools.
 
 results are published daily to https://c-testsuite.github.io/
 
-# Runner
-
-The top level test-suite runners output https://testanything.org output.
 
 # Test suites
 
-## tests/simple-exec/*
+The top level test-suite runners output https://testanything.org output.
 
-- Single .c file tests.
-- These tests must not require a preprocessor.
-- They are linked against libc.
-- If the file $t.c.expected exists, stdout of test must match this.
+## simple-exec suite
 
-The drivers for simple-exec must live at ```runners/simple-exec/$COMPILER```
+entry point is ```./simple-exec```
+
+### project specific test runners ./runners/simple-exec/*
 
 The driver will be invoked as:
 
 ```
-$ ./runners/simple-exec/$COMPILER test/simple-exec/case.c
+$ ./runners/simple-exec/$NAME test/simple-exec/case.c
 ```
 
 The runner is free to output any data it wants, but must return
@@ -40,9 +36,17 @@ The runner will be considered a failure if it takes more than 5 minutes.
 The runner is responsible for checking output and running the binary. This
 allows for emulators and other configuration.
 
+### test files tests/simple-exec/*
+
+- Single .c file tests.
+- These tests must not require a preprocessor.
+- They are linked against libc.
+- If the file $t.c.expected exists, stdout of test must match this.
+
+
 ### Example:
 
-```$ ./simple-exec 9cc ```
+```$ ./simple-exec gcc ```
 
 
 # Skipping tests
