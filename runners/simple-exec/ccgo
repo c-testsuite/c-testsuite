@@ -1,28 +1,8 @@
-#! /usr/bin/env bash
+#! /bin/sh
 
-set -e
-set -u
+CC=ccgo
+# A typical configuration
+CFLAGS=""
 
-t=$1
-
-cat $t
-
-set -x
-
-if ! ccgo "$t" -o "$t.bin"
-then
-    exit 1
-fi
-
-if ! "$t.bin" > "t.output"
-then
-    exit 1
-fi
-
-if test -f "$t.expected"
-then
-    if ! diff -u "$t.expected" "$t.output"
-    then
-        exit 1
-    fi
-fi
+export CC CFLAGS
+exec ./runners/simple-exec/posix $1
