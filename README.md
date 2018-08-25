@@ -41,6 +41,9 @@ The runner will be considered a failure if it takes more than 5 minutes.
 - They are not linked against any libraries.
 - If the file $t.c.expected exists, stdout of test must match this.
 
+### Example:
+
+```$ ./simple-exec gcc ```
 
 ## output-exec suite
 
@@ -73,7 +76,7 @@ allows for emulators and other configuration.
 
 ### Example:
 
-```$ ./simple-exec gcc ```
+```$ ./output-exec gcc ```
 
 
 # Skipping tests
