@@ -39,7 +39,6 @@ The runner will be considered a failure if it takes more than 5 minutes.
 - 'main' is the entry point.
 - These tests must not require a preprocessor.
 - They are not linked against any libraries.
-- If the file $t.c.expected exists, stdout of test must match this.
 
 ### Example:
 
