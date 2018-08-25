@@ -38,10 +38,6 @@ export PATH="$(pwd)":$PATH
 cd ..
 (cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
 
-# valgrind is used by a few runners
-# XXX valgrind from nix-env is failing on some tests.
-# nix-env -i valgrind
-
 # install ccgo
 nix-env -i go
 # remove all the travis ci preset variables.
