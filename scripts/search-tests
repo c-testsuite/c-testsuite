@@ -8,7 +8,7 @@ fi
 
 if ! test -d ./.tmsu
 then
-	echo "run regenerate-search-db first"
+	echo "run regenerate-search-index first"
 	exit 1
 fi
 
