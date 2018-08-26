@@ -1,0 +1,59 @@
+#! /bin/sh
+
+set -e
+set -u
+
+if ! test -f README.md
+then
+    echo "run from the base directory." >&2
+    exit 1
+fi
+
+if test -d ./.tmsu/
+then
+    rm -r ./.tmsu/
+fi
+
+tmsu init
+
+tmsu imply c89 c99
+tmsu imply c99 c11
+
+for suite in simple-exec output-exec
+do
+    for t in ./tests/"$suite"/*.c
+    do
+        tmsu tag "$t" "suite=$suite"
+
+        if test -f "$t.LICENSE"
+        then
+            tmsu tag "$t" "license=$t.LICENSE"
+        else
+            tmsu tag "$t" "license=./LICENSE"
+        fi
+
+        OLDIFS="$IFS"
+        IFS="\n"
+        for tagline in $(cat "$t.tags")
+        do
+            if test -z "$tagline"
+            then
+                continue
+            fi
+            tmsu tag --tags="$tagline" "$t"
+        done
+        IFS="$OLDIFS"
+    done
+done
+
+
+# Validation
+
+q="(not c89) and (not c99) and (not c11)"
+n=$(tmsu files "$q" | wc -l)
+if test "$n" != "0"
+then
+    echo "Tests without a specified standard, aborting:"
+    tmsu files "$q"
+    exit 1
+fi

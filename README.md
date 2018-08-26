@@ -87,12 +87,60 @@ In that case, there is only one mechanism, add the test as a single line to the 
 ./runners/*/$COMPILER.skip
 ```
 
+# Search and query
+
+All tests have a matching $t.tags file. This file specifies attributes of the test that
+can be filtered and queried.
+
+The query language is documented here:
+
+https://github.com/oniony/TMSU/blob/master/misc/ebnf/query.ebnf
+
+Support tags are currently
+
+```
+suite={single-exec, ...}
+license={unknown, $LICENSE_PATH}
+arch={portable, amd64}
+c89
+c99
+c11
+needs-libc-linkage
+needs-libc-headers
+```
+
+Implicit tags:
+
+c89 implies c99 and c11
+c99 implies c11
+
+example query:
+```
+$ ./scripts/regenerate-search-index
+$ ./scripts/search-tests "c99 suite=single-exec (arch=portable or arch=amd64)"
+```
+
+These queries can be used to generate skip lists.
+
 # Dependencies
+
+Running tests
 
 - posix sh
 - python3
 - coreutils
 - tool under test
+
+Querying tests
+
+Currently test search is based on:
+
+https://github.com/oniony/TMSU
+
+We are sympathetic to those who do not wish to deal with
+installing a lesser known third party tool, so will think of
+ways to ease the burden in the future.
+
 
 # Tips
 
