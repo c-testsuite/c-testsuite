@@ -14,26 +14,20 @@ then
     rm -r ./.tmsu/
 fi
 
+
 tmsu init
 
 tmsu imply c89 c99
 tmsu imply c99 c11
 
-for suite in simple-exec output-exec
+for suite in single-exec
 do
     for t in ./tests/"$suite"/*.c
     do
         tmsu tag "$t" "suite=$suite"
 
-        if test -f "$t.LICENSE"
-        then
-            tmsu tag "$t" "license=$t.LICENSE"
-        else
-            tmsu tag "$t" "license=./LICENSE"
-        fi
-
         OLDIFS="$IFS"
-        IFS="\n"
+        IFS=$'\n'
         for tagline in $(cat "$t.tags")
         do
             if test -z "$tagline"

@@ -1,0 +1,76 @@
+#! /usr/bin/env bash
+
+set -e
+set -u
+set -x
+
+if ! test -f README.md
+then
+    echo "run from the base directory." >&2
+    exit 1
+fi
+
+in=$1
+
+if ! test -f $in
+then
+    echo "$in does not exist" >&2
+    exit 1
+fi
+
+chosenname=""
+foundname="n"
+for n in $(seq 10000)
+do
+    paddedn=$(printf "%05d" "$n")
+    chosenname="$paddedn.c"
+
+    if test -f $chosenname 
+    then
+        continue
+    fi
+
+    foundname="y"
+    break
+done
+
+if test "$foundname" = "n"
+then
+    echo "no numbers left."  >&2
+    exit 1
+fi
+
+
+echo "added as $chosenname"
+cat $in > ./tests/single-exec/"$chosenname"
+added="y"
+tagfile=./tests/single-exec/"$chosenname.tags"
+
+echo "inferring tags..."
+
+echo "license=unknown" > $tagfile
+echo "origin=unknown" >> $tagfile
+# XXX Check for arch?
+echo "arch=portable" >> $tagfile
+
+# Check for cstd
+if gcc --std=c89 -o /tmp/ctestsuite-infer.o $in
+then
+    echo "c89" >> $tagfile
+elif gcc --std=c99 -o /tmp/ctestsuite-infer.o $in
+then
+    echo "c99" >> $tagfile
+elif gcc --std=c11 -o /tmp/ctestsuite-infer.o $in
+then
+    echo "c11" >> $tagfile
+else
+    echo "unable to guess c std"
+fi 
+
+if grep -e "#include"  $in
+then
+    echo "cpp" >> $tagfile
+    echo "needs-libc-headers" >> $tagfile
+fi
+
+echo "please check: $tagfile"

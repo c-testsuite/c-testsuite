@@ -4,4 +4,4 @@ CC=ccomp
 CFLAGS="-fstruct-passing -O2"
 
 export CC CFLAGS
-exec ./runners/output-exec/posix $1
+exec ./runners/single-exec/posix $1

@@ -1,8 +1,8 @@
 #! /bin/sh
 
-CC=gcc
+CC=ccgo
 # A typical configuration
-CFLAGS="-O2"
+CFLAGS=""
 
 export CC CFLAGS
-exec ./runners/simple-exec/posix $1
+exec ./runners/single-exec/posix $1

@@ -16,16 +16,16 @@ results are published daily to https://c-testsuite.github.io/
 
 The top level test-suite runners output https://testanything.org output.
 
-## simple-exec suite
+## single-exec suite
 
-entry point is ```./simple-exec```
+entry point is ```./single-exec```
 
-### runners/simple-exec/*
+### runners/single-exec/*
 
 The runner will be invoked as:
 
 ```
-$ ./runners/simple-exec/$NAME test/simple-exec/case.c
+$ ./runners/single-exec/$NAME test/single-exec/case.c
 ```
 
 The runner is free to output any data it wants, but must return
@@ -33,49 +33,20 @@ nonzero on failure.
 
 The runner will be considered a failure if it takes more than 5 minutes.
 
-### tests/simple-exec/*
+### tests/single-exec/*
 
 - Single .c file tests.
 - 'main' is the entry point.
-- These tests must not require a preprocessor.
-- They are not linked against any libraries.
-
-### Example:
-
-```$ ./simple-exec gcc ```
-
-## output-exec suite
-
-entry point is ```./output-exec```
-
-### runners/output-exec/*
-
-The runner will be invoked as:
-
-```
-$ ./runners/output-exec/$NAME test/output-exec/case.c
-```
-
-The runner is free to output any data it wants, but must return
-nonzero on failure.
-
-The runner will be considered a failure if it takes more than 5 minutes.
-
-The runner is responsible for checking output and running the binary. This
-allows for emulators and other configuration.
-
-### tests/output-exec/*
-
-- Single .c file tests.
-- 'main' is the entry point.
-- These tests must not require a preprocessor.
-- They may use 'exit, abort, printf' calls.
 - If the file $t.c.expected exists, stdout+stderr of test must match this.
+- The test programs exit with 0 on success.
 
+C standard, Portability, preprocessor and libc requirements
+are specified via tags that can be filtered against using
+search queries, that can generate skip lists.
 
 ### Example:
 
-```$ ./output-exec gcc ```
+```$ ./single-exec gcc-x86_64 ```
 
 
 # Skipping tests
@@ -89,10 +60,12 @@ In that case, there is only one mechanism, add the test as a single line to the 
 
 # Search and query
 
-All tests have a matching $t.tags file. This file specifies attributes of the test that
-can be filtered and queried.
+All tests have a matching $t.tags file. This file specifies attributes
+of the test that can be filtered and queried.
 
-The query language is documented here:
+The query language is based off of https://github.com/oniony/TMSU tags.
+
+The query language grammar is shown here:
 
 https://github.com/oniony/TMSU/blob/master/misc/ebnf/query.ebnf
 
@@ -105,6 +78,7 @@ arch={portable, amd64}
 c89
 c99
 c11
+needs-cpp
 needs-libc-linkage
 needs-libc-headers
 ```
@@ -116,7 +90,7 @@ c99 implies c11
 
 example query:
 ```
-$ ./scripts/regenerate-search-index
+$ ./scripts/make-search-index
 $ ./scripts/search-tests "c99 suite=single-exec (arch=portable or arch=amd64)"
 ```
 
@@ -131,9 +105,9 @@ Running tests
 - coreutils
 - tool under test
 
-Querying tests
+Querying tests:
 
-Currently test search is based on:
+Currently test search is based on
 
 https://github.com/oniony/TMSU
 
@@ -141,23 +115,22 @@ We are sympathetic to those who do not wish to deal with
 installing a lesser known third party tool, so will think of
 ways to ease the burden in the future.
 
-
 # Tips
 
 ## Naming test cases
 
 The names are not stable for now, so if you 
 refer to a test case in your issue tracker, it is best to 
-name it something like ``c-testsuite/$CTESTGITCOMMIT/path/to/test```.
+name it something like ```c-testsuite/$CTESTGITCOMMIT/path/to/test```.
 
 ## Getting a summary from the command line
 
-./simple-exec gcc | ./scripts/tapsummary | head
+./single-exec $runner | ./scripts/tapsummary | head
 
 ## The full TAP test suites report can be viewed or 'curl'ed
 
 For example:
 
 - https://c-testsuite.github.io/gcc_report.html
-- https://c-testsuite.github.io/gcc-simple-exec_report.tap
-- https://c-testsuite.github.io/gcc-simple-exec_report.tap.txt
+- https://c-testsuite.github.io/gcc-single-exec_report.tap
+- https://c-testsuite.github.io/gcc-single-exec_report.tap.txt
