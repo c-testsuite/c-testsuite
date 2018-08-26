@@ -105,14 +105,24 @@ arch={portable, amd64}
 c89
 c99
 c11
+needs-cpp
+    Test relies on the preprocessor
+needs-ctest-io
+    Test relies on 'void abort(void)' and 'printf(char *, ...)'
 needs-libc-linkage
+    Test relies on libc linkage
 needs-libc-headers
+    Test relies on libc headers
 ```
 
 Implicit tags:
 
 c89 implies c99 and c11
 c99 implies c11
+
+needs-libc-linkage implies needs-ctest-io
+
+needs-libc-headers implies needs-cpp
 
 example query:
 ```
