@@ -18,15 +18,26 @@ cleanup () {
 trap cleanup EXIT
 
 echo "TAP version 13"
-echo "1..$(find ./tests/simple-exec/ -name "*.c" | wc -l)"
+echo "1..$(find ./tests/single-exec/ -name "*.c" | wc -l)"
 
-testdir="./tests/simple-exec"
-runner="./runners/simple-exec/$compiler"
+testdir="./tests/single-exec"
+runner="./runners/single-exec/$compiler"
+
+skiplist="./runners/single-exec/$compiler.skip"
+skipset="$scratchdir/skip_lut "
+
+if test -f "$skiplist"
+then
+    ./scripts/lib-exec/mkset "$skipset" "$skiplist"
+else
+    echo -n "" | ./scripts/lib-exec/mkset "$skipset"
+fi
+
 for t in $testdir/*.c
 do
     result="ok"
 
-    if ./scripts/shouldskip simple-exec "$compiler" "$t"
+    if ./scripts/lib-exec/setlookup "$skipset" "$t"
     then
         echo "ok $t # SKIP"
         continue
