@@ -151,15 +151,19 @@ done
 
 if test "$TRAVIS" = "true"
 then
-    set +x
-    umask 077
-    gpg2 --batch --passphrase "$DEPLOY_SSH_KEY_PASSWORD" --decrypt ./ci/deploy_key.gpg > ./ci/deploy_key
-    set -x
-    export GIT_SSH_COMMAND="ssh -i $(pwd)/ci/deploy_key"
-    cd ./output_html
-    git init
-    git remote add origin git@github.com:c-testsuite/c-testsuite.github.io.git
-    git add *
-    git commit -m "automated commit" -a
-    git push -f --set-upstream origin master
+    # only deploy the site from main branch
+    if test "$TRAVIS_PULL_REQUEST" = "false" 
+    then
+        set +x
+        umask 077
+        gpg2 --batch --passphrase "$DEPLOY_SSH_KEY_PASSWORD" --decrypt ./ci/deploy_key.gpg > ./ci/deploy_key
+        set -x
+        export GIT_SSH_COMMAND="ssh -i $(pwd)/ci/deploy_key"
+        cd ./output_html
+        git init
+        git remote add origin git@github.com:c-testsuite/c-testsuite.github.io.git
+        git add *
+        git commit -m "automated commit" -a
+        git push -f --set-upstream origin master
+    fi
 fi
