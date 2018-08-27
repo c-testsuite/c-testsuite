@@ -19,6 +19,8 @@ tmsu init
 
 tmsu imply c89 c99
 tmsu imply c99 c11
+tmsu imply needs-libc-linkage needs-ctest-io
+tmsu imply needs-libc-headers needs-cpp
 
 for suite in single-exec
 do

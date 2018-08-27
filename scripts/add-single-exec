@@ -48,10 +48,8 @@ tagfile=./tests/single-exec/"$chosenname.tags"
 
 echo "inferring tags..."
 
-echo "license=unknown" > $tagfile
-echo "origin=unknown" >> $tagfile
-# XXX Check for arch?
-echo "arch=portable" >> $tagfile
+# XXX infer somehow?
+echo "arch=portable" > $tagfile
 
 # Check for cstd
 if gcc --std=c89 -o /tmp/ctestsuite-infer.o $in
@@ -67,10 +65,16 @@ else
     echo "unable to guess c std"
 fi 
 
-if grep -e "#include"  $in
+if grep -q -e "#include" "$in"
+then
+    # Since these are single file tests, the only
+    # thing we could include would be libc headers. 
+    echo "needs-libc-headers" >> $tagfile
+fi
+
+if grep -q -e "#include" -e "#define" -e "#if" -e "#ifdef" "$in"
 then
     echo "cpp" >> $tagfile
-    echo "needs-libc-headers" >> $tagfile
 fi
 
 echo "please check: $tagfile"

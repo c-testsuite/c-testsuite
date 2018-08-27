@@ -51,11 +51,11 @@ search queries, that can generate skip lists.
 
 # Skipping tests
 
-Only skip a test if your compiler platform can NEVER pass it, the test is not appropriate.
+Try to skip a test if your compiler platform can NEVER pass it, the test is not appropriate.
 In that case, there is only one mechanism, add the test as a single line to the file:
 
 ```
-./runners/*/$COMPILER.skip
+./runners/*/$TOOL.skip
 ```
 
 # Search and query
@@ -73,7 +73,6 @@ Support tags are currently
 
 ```
 suite={single-exec, ...}
-license={unknown, $LICENSE_PATH}
 arch={portable, amd64}
 c89
 c99
