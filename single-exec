@@ -24,7 +24,7 @@ testdir="./tests/single-exec"
 runner="./runners/single-exec/$compiler"
 
 skipcmd="./runners/single-exec/$compiler.skip"
-skipset="$scratchdir/skip_lut "
+skipset="$scratchdir/skip_lut"
 
 if test -f "$skipcmd"
 then
@@ -43,6 +43,7 @@ for t in $testdir/*.c
 do
     result="ok"
 
+    
     if ./scripts/lib-exec/setlookup "$skipset" "$t"
     then
         echo "ok $t # SKIP"

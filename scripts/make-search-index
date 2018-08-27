@@ -35,17 +35,14 @@ do
     do
         tmsu tag "$t" "suite=$suite"
 
-        OLDIFS="$IFS"
-        IFS=$'\n'
-        for tagline in $(cat "$t.tags")
+        while read -r tagline
         do
             if test -z "$tagline"
             then
                 continue
             fi
             tmsu tag --tags="$tagline" "$t"
-        done
-        IFS="$OLDIFS"
+        done < "$t.tags"
     done
 done
 
