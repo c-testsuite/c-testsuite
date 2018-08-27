@@ -1,8 +1,0 @@
-#! /bin/sh
-
-CC=gcc
-# A typical configuration
-CFLAGS="-O2"
-
-export CC CFLAGS
-exec ./runners/single-exec/posix $1

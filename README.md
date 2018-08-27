@@ -52,7 +52,8 @@ search queries, that can generate skip lists.
 # Skipping tests
 
 Try to skip a test if your compiler platform can NEVER pass it, the test is not appropriate.
-In that case, there is only one mechanism, add the test as a single line to the file:
+In that case, there is only one mechanism, add a command that prints a list of tests to skip
+on stdout named:
 
 ```
 ./runners/*/$TOOL.skip
@@ -73,7 +74,7 @@ Support tags are currently
 
 ```
 suite={single-exec, ...}
-arch={portable, amd64}
+arch={portable, x86_64}
 c89
 c99
 c11

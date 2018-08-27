@@ -1,6 +1,0 @@
-#! /bin/sh
-
-CC=tcc
-CFLAGS=""
-export CC CFLAGS
-exec ./runners/single-exec/posix $1

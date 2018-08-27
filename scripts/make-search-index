@@ -14,13 +14,14 @@ then
     rm -r ./.tmsu/
 fi
 
-
 tmsu init
 
 tmsu imply c89 c99
 tmsu imply c99 c11
 tmsu imply needs-libc-linkage needs-ctest-io
 tmsu imply needs-libc-headers needs-cpp
+tmsu tag -c arch =x86_64 =portable
+
 
 for suite in single-exec
 do

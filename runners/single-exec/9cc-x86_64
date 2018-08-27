@@ -3,6 +3,12 @@
 set -e
 set -u
 
+if ! test "x86_64" = "$(uname -m)"
+then
+    echo "incorrect host for test" 1>&2
+    exit 1
+fi
+
 t=$1
 
 cat $t

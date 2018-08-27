@@ -1,0 +1,12 @@
+#! /bin/sh
+
+if ! test "x86_64" = "$(uname -m)"
+then
+    echo "incorrect host for test" 1>&2
+    exit 1
+fi
+
+CC=tcc
+CFLAGS=""
+export CC CFLAGS
+exec ./runners/single-exec/posix $1

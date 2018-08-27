@@ -106,7 +106,7 @@ last updated: $testrundate
 </html>
 EOF
 
-for compiler in 9cc ccgo gcc clang tcc compcert
+for compiler in 9cc-x86_64 ccgo gcc-x86_64 clang-x86_64 tcc-x86_64 compcert-x86_64
 do
     htmlfile="./output_html/${compiler}_report.html"
 

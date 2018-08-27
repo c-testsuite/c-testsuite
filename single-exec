@@ -23,12 +23,18 @@ echo "1..$(find ./tests/single-exec/ -name "*.c" | wc -l)"
 testdir="./tests/single-exec"
 runner="./runners/single-exec/$compiler"
 
-skiplist="./runners/single-exec/$compiler.skip"
+skipcmd="./runners/single-exec/$compiler.skip"
 skipset="$scratchdir/skip_lut "
 
-if test -f "$skiplist"
+if test -f "$skipcmd"
 then
-    ./scripts/lib-exec/mkset "$skipset" "$skiplist"
+    if ! $skipcmd > "$scratchdir/skip.txt"
+    then
+        echo "unable to generate skip command" 1>&2
+        exit 1
+    fi
+
+    ./scripts/lib-exec/mkset "$skipset" "$scratchdir/skip.txt"
 else
     echo -n "" | ./scripts/lib-exec/mkset "$skipset"
 fi
