@@ -21,6 +21,8 @@ trap cleanup EXIT
 # install tmsu
 nix-env -i tmsu
 
+./scripts/make-search-index
+
 # Get latest 9cc version.
 if ! test -d 9cc_git
 then
