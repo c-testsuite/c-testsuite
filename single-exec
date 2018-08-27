@@ -30,7 +30,7 @@ if test -f "$skipcmd"
 then
     if ! $skipcmd > "$scratchdir/skip.txt"
     then
-        echo "unable to generate skip command" 1>&2
+        echo "skip list command failed" 1>&2
         exit 1
     fi
 
