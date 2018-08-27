@@ -74,7 +74,7 @@ fi
 
 if grep -q -e "#include" -e "#define" -e "#if" -e "#ifdef" "$in"
 then
-    echo "cpp" >> $tagfile
+    echo "needs-cpp" >> $tagfile
 fi
 
 echo "please check: $tagfile"
