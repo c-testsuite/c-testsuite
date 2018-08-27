@@ -80,22 +80,22 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <br>
 <br>
 <a href="https://github.com/rui314/9cc">9cc</a>
-<a href="/9cc_report.html">test report</a>
+<a href="/9cc-x86_64_report.html">test report</a>
 <br>
 <a href="https://github.com/cznic/ccgo/tree/master/v2">ccgo</a>
 <a href="/ccgo_report.html">test report</a>
 <br>
 <a href="https://clang.llvm.org/">clang</a>
-<a href="/clang_report.html">test report</a>
+<a href="/clang-x86_64_report.html">test report</a>
 <br>
 <a href="http://gcc.gnu.org/">gcc</a>
-<a href="/gcc_report.html">test report</a>
+<a href="/gcc-x86_64_report.html">test report</a>
 <br>
 <a href="https://bellard.org/tcc/">tcc</a>
-<a href="/tcc_report.html">test report</a>
+<a href="/tcc-x86_64_report.html">test report</a>
 <br>
 <a href="http://compcert.inria.fr/">compcert</a>
-<a href="/compcert_report.html">test report</a>
+<a href="/compcert-x86_64_report.html">test report</a>
 <br>
 
 <br>
@@ -149,14 +149,17 @@ EOF
 
 done
 
-set +x
-umask 077
-gpg2 --batch --passphrase "$DEPLOY_SSH_KEY_PASSWORD" --decrypt ./ci/deploy_key.gpg > ./ci/deploy_key
-set -x
-export GIT_SSH_COMMAND="ssh -i $(pwd)/ci/deploy_key"
-cd ./output_html
-git init
-git remote add origin git@github.com:c-testsuite/c-testsuite.github.io.git
-git add *
-git commit -m "automated commit" -a
-git push -f --set-upstream origin master
+if test "$TRAVIS" = "true"
+then
+    set +x
+    umask 077
+    gpg2 --batch --passphrase "$DEPLOY_SSH_KEY_PASSWORD" --decrypt ./ci/deploy_key.gpg > ./ci/deploy_key
+    set -x
+    export GIT_SSH_COMMAND="ssh -i $(pwd)/ci/deploy_key"
+    cd ./output_html
+    git init
+    git remote add origin git@github.com:c-testsuite/c-testsuite.github.io.git
+    git add *
+    git commit -m "automated commit" -a
+    git push -f --set-upstream origin master
+fi
