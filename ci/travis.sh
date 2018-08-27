@@ -39,7 +39,7 @@ then
 fi
 export PATH="$(pwd)":$PATH
 cd ..
-(cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
+(cd 9cc_git && git rev-parse HEAD) > 9cc-x86_64_version.txt
 
 # install ccgo
 nix-env -i go
@@ -54,20 +54,20 @@ export PATH=$HOME/go/bin:$PATH
 
 # install tcc
 nix-env -i tcc
-tcc -version > tcc_version.txt
+tcc -version > tcc-x86_64_version.txt
 
 # install compcert
 NIXPKGS_ALLOW_UNFREE=1  nix-env -i compcert
-ccomp --version > compcert_version.txt
+ccomp --version > compcert-x86_64_version.txt
 
 # install gcc 
 # ideally each runner just gets its own nix environment
 # XXX we just use what travis offers for now.
-gcc --version | head -n 1 > gcc_version.txt
+gcc --version | head -n 1 > gcc-x86_64_version.txt
 
 # install clang
 # XXX we just use what travis offers for now.
-clang --version | head -n 1 > clang_version.txt
+clang --version | head -n 1 > clang-x86_64_version.txt
 
 # Run tests for each, generating html
 test -d && rm -rf ./output_html
