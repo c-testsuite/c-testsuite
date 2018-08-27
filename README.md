@@ -86,6 +86,8 @@ needs-libc-linkage
     Test relies on libc linkage
 needs-libc-headers
     Test relies on libc headers
+needs-libc
+    Test relies on libc
 ```
 
 Implicit tags:
@@ -94,8 +96,8 @@ c89 implies c99 and c11
 c99 implies c11
 
 needs-libc-linkage implies needs-ctest-io
-
 needs-libc-headers implies needs-cpp
+needs-libc implies needs-libc-headers needs-libc-linkage
 
 example query:
 ```
