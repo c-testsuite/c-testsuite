@@ -58,7 +58,7 @@ export PATH=$HOME/go/bin:$PATH
 # install c2go
 
 go get -v -u github.com/elliotchance/c2go
-(cd $HOME/go/src/ github.com/elliotchance/c2go/ && git rev-parse HEAD) > c2go_version.txt
+(cd $HOME/go/src/github.com/elliotchance/c2go/ && git rev-parse HEAD) > c2go_version.txt
 
 # install tcc
 nix-env -i tcc
