@@ -101,6 +101,18 @@ $ ./scripts/search-tests "c99 suite=single-exec (arch=portable or arch=amd64)"
 
 These queries can be used to generate skip lists.
 
+# otag files
+
+otag files are intended to allow
+a tests origin to be discovered.
+
+```
+org=$DOMAINNAME
+repository=$SRCURL
+version=$UNIQUE_VERSION
+path=$TEST_PATH_IN_REPOSITORY
+```
+
 # Dependencies
 
 Running tests
