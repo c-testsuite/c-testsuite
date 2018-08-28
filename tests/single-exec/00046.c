@@ -4,7 +4,7 @@ typedef struct {
 		int b1;
 		int b2;
 	};
-	struct { union { struct { int c; }; struct {}; }; };
+	struct { union { struct { int c; }; }; };
 	struct {
 		int d;
 	};
