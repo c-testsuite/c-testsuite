@@ -10,12 +10,19 @@ cat $t
 
 set -x
 
-if ! c2go transpile -o "$t.go" "$t"
+mkdir "$t-c2go"
+
+if ! c2go transpile -o "$t-c2go/main.go" "$t"
 then
     exit 1
 fi
 
-if ! go run "$t.go" > "$t.output" 2>&1
+if ! (cd "$t-c2go" && go build -o "$t.bin")
+then
+    exit 1
+fi
+
+if ! "$t.bin" > "$t.output" 2>&1
 then
     exit 1
 fi
