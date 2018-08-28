@@ -37,7 +37,8 @@ The runner will be considered a failure if it takes more than 5 minutes.
 
 - Single .c file tests.
 - 'main' is the entry point.
-- If the file $t.c.expected exists, stdout+stderr of test must match this.
+- The file $t.c.expected must match stdout+stderr of
+  the test.
 - The test programs exit with 0 on success.
 
 C standard, Portability, preprocessor and libc requirements
@@ -74,18 +75,15 @@ Support tags are currently
 
 ```
 suite={single-exec, ...}
-arch={portable, x86_64}
+portable
+	The test should be portable C.
+arch-x86_64
+	The test should pass on x86_64
 c89
 c99
 c11
 needs-cpp
     Test relies on the preprocessor
-needs-ctest-io
-    Test relies on 'void abort(void)' and 'printf(char *, ...)'
-needs-libc-linkage
-    Test relies on libc linkage
-needs-libc-headers
-    Test relies on libc headers
 needs-libc
     Test relies on libc
 ```
@@ -94,10 +92,6 @@ Implicit tags:
 
 c89 implies c99 and c11
 c99 implies c11
-
-needs-libc-linkage implies needs-ctest-io
-needs-libc-headers implies needs-cpp
-needs-libc implies needs-libc-headers needs-libc-linkage
 
 example query:
 ```

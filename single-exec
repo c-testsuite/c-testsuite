@@ -17,14 +17,20 @@ cleanup () {
 }
 trap cleanup EXIT
 
-echo "TAP version 13"
-echo "1..$(find ./tests/single-exec/ -name "*.c" | wc -l)"
-
 testdir="./tests/single-exec"
 runner="./runners/single-exec/$compiler"
 
 skipcmd="./runners/single-exec/$compiler.skip"
 skipset="$scratchdir/skip_lut"
+
+echo "TAP version 13"
+echo "1..$(find ./tests/single-exec/ -name "*.c" | wc -l)"
+
+if ! test -f "$runner"
+then
+    echo "$runner does not exist!" 1>&2
+    exit 1
+fi
 
 if test -f "$skipcmd"
 then

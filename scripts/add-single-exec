@@ -18,14 +18,14 @@ then
     exit 1
 fi
 
-chosenname=""
+chosenfile=""
 foundname="n"
 for n in $(seq 10000)
 do
     paddedn=$(printf "%05d" "$n")
-    chosenname="$paddedn.c"
+    chosenfile="./tests/single-exec/$paddedn.c"
 
-    if test -f $chosenname 
+    if test -f "$chosenfile" 
     then
         continue
     fi
@@ -41,15 +41,13 @@ then
 fi
 
 
-echo "added as $chosenname"
-cat $in > ./tests/single-exec/"$chosenname"
+cat $in > "$chosenfile"
 added="y"
-tagfile=./tests/single-exec/"$chosenname.tags"
+tagfile="$chosenfile.tags"
 
-echo "inferring tags..."
+echo "inferring tags..." 1>&2
 
-# XXX infer somehow?
-echo "arch=portable" > $tagfile
+echo "portable" > $tagfile
 
 # Check for cstd
 if gcc --std=c89 -o /tmp/ctestsuite-infer.o $in
@@ -69,7 +67,7 @@ if grep -q -e "#include" "$in"
 then
     # Since these are single file tests, the only
     # thing we could include would be libc headers. 
-    echo "needs-libc-headers" >> $tagfile
+    echo "needs-libc" >> $tagfile
 fi
 
 if grep -q -e "#include" -e "#define" -e "#if" -e "#ifdef" "$in"
@@ -77,4 +75,4 @@ then
     echo "needs-cpp" >> $tagfile
 fi
 
-echo "please check: $tagfile"
+echo "$chosenfile"

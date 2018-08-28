@@ -17,16 +17,10 @@ fi
 tmsu init
 
 tmsu tag -c arch =x86_64 =portable \
-  needs-cpp needs-ctest-io needs-libc \
-  needs-libc-linkage needs-libc-headers
-
+  needs-cpp needs-libc
 tmsu imply c89 c99
 tmsu imply c99 c11
-tmsu imply needs-libc needs-libc-linkage
-tmsu imply needs-libc needs-libc-headers
-tmsu imply needs-libc needs-ctest-io 
-tmsu imply needs-libc-linkage needs-ctest-io
-tmsu imply needs-libc-headers needs-cpp
+tmsu imply needs-libc needs-cpp
 
 
 for suite in single-exec
@@ -58,11 +52,11 @@ then
     exit 1
 fi
 
-q="not arch"
+q="not portable and not arch-x86_64"
 n=$(tmsu files "$q" | wc -l)
 if test "$n" != "0"
 then
-    echo "Tests a specified arch, aborting:"
+    echo "Tests without a specified arch, aborting:"
     tmsu files "$q"
     exit 1
 fi

@@ -30,10 +30,7 @@ then
     exit 1
 fi
 
-if test -f "$t.expected"
+if ! diff -u "$t.expected" "$t.output"
 then
-    if ! diff -u "$t.expected" "$t.output"
-    then
-        exit 1
-    fi
+    exit 1
 fi
