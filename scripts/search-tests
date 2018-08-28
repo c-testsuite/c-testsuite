@@ -1,0 +1,23 @@
+#! /bin/sh
+
+set -e
+set -u
+
+if ! test -f README.md
+then
+	echo "please run from the c-test root directory"
+	exit 1
+fi
+
+if ! test -d ./.tmsu
+then
+	echo "run regenerate-search-index first"
+	exit 1
+fi
+
+if test "$#" -eq "1"
+then
+	tmsu files "$1"
+else
+	tmsu files 
+fi

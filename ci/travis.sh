@@ -18,6 +18,11 @@ cleanup () {
 }
 trap cleanup EXIT
 
+# install tmsu
+nix-env -i tmsu
+
+./scripts/make-search-index
+
 # Get latest 9cc version.
 if ! test -d 9cc_git
 then
@@ -36,7 +41,7 @@ then
 fi
 export PATH="$(pwd)":$PATH
 cd ..
-(cd 9cc_git && git rev-parse HEAD) > 9cc_version.txt
+(cd 9cc_git && git rev-parse HEAD) > 9cc-x86_64_version.txt
 
 # install ccgo
 nix-env -i go
@@ -51,20 +56,20 @@ export PATH=$HOME/go/bin:$PATH
 
 # install tcc
 nix-env -i tcc
-tcc -version > tcc_version.txt
+tcc -version > tcc-x86_64_version.txt
 
 # install compcert
 NIXPKGS_ALLOW_UNFREE=1  nix-env -i compcert
-ccomp --version > compcert_version.txt
+ccomp --version > compcert-x86_64_version.txt
 
 # install gcc 
 # ideally each runner just gets its own nix environment
 # XXX we just use what travis offers for now.
-gcc --version | head -n 1 > gcc_version.txt
+gcc --version | head -n 1 > gcc-x86_64_version.txt
 
 # install clang
 # XXX we just use what travis offers for now.
-clang --version | head -n 1 > clang_version.txt
+clang --version | head -n 1 > clang-x86_64_version.txt
 
 # Run tests for each, generating html
 test -d && rm -rf ./output_html
@@ -80,22 +85,22 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <br>
 <br>
 <a href="https://github.com/rui314/9cc">9cc</a>
-<a href="/9cc_report.html">test report</a>
+<a href="/9cc-x86_64_report.html">test report</a>
 <br>
 <a href="https://github.com/cznic/ccgo/tree/master/v2">ccgo</a>
 <a href="/ccgo_report.html">test report</a>
 <br>
 <a href="https://clang.llvm.org/">clang</a>
-<a href="/clang_report.html">test report</a>
+<a href="/clang-x86_64_report.html">test report</a>
 <br>
 <a href="http://gcc.gnu.org/">gcc</a>
-<a href="/gcc_report.html">test report</a>
+<a href="/gcc-x86_64_report.html">test report</a>
 <br>
 <a href="https://bellard.org/tcc/">tcc</a>
-<a href="/tcc_report.html">test report</a>
+<a href="/tcc-x86_64_report.html">test report</a>
 <br>
 <a href="http://compcert.inria.fr/">compcert</a>
-<a href="/compcert_report.html">test report</a>
+<a href="/compcert-x86_64_report.html">test report</a>
 <br>
 
 <br>
@@ -106,7 +111,7 @@ last updated: $testrundate
 </html>
 EOF
 
-for compiler in 9cc ccgo gcc clang tcc compcert
+for compiler in 9cc-x86_64 ccgo gcc-x86_64 clang-x86_64 tcc-x86_64 compcert-x86_64
 do
     htmlfile="./output_html/${compiler}_report.html"
 
@@ -125,7 +130,7 @@ EOF
     echo "test date: $testrundate" >> "$htmlfile"
 
 
-    for testsuite in simple-exec output-exec
+    for testsuite in single-exec
     do
         testrunname="$compiler-$testsuite"
         results="$scratchdir/$testrunname.tap"
@@ -149,14 +154,21 @@ EOF
 
 done
 
-set +x
-umask 077
-gpg2 --batch --passphrase "$DEPLOY_SSH_KEY_PASSWORD" --decrypt ./ci/deploy_key.gpg > ./ci/deploy_key
-set -x
-export GIT_SSH_COMMAND="ssh -i $(pwd)/ci/deploy_key"
-cd ./output_html
-git init
-git remote add origin git@github.com:c-testsuite/c-testsuite.github.io.git
-git add *
-git commit -m "automated commit" -a
-git push -f --set-upstream origin master
+if test "$TRAVIS" = "true"
+then
+    # only deploy the site from main branch
+    if test "$TRAVIS_PULL_REQUEST" = "false" 
+    then
+        set +x
+        umask 077
+        gpg2 --batch --passphrase "$DEPLOY_SSH_KEY_PASSWORD" --decrypt ./ci/deploy_key.gpg > ./ci/deploy_key
+        set -x
+        export GIT_SSH_COMMAND="ssh -i $(pwd)/ci/deploy_key"
+        cd ./output_html
+        git init
+        git remote add origin git@github.com:c-testsuite/c-testsuite.github.io.git
+        git add *
+        git commit -m "automated commit" -a
+        git push -f --set-upstream origin master
+    fi
+fi

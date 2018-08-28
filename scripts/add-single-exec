@@ -1,0 +1,78 @@
+#! /usr/bin/env bash
+
+set -e
+set -u
+set -x
+
+if ! test -f README.md
+then
+    echo "run from the base directory." >&2
+    exit 1
+fi
+
+in=$1
+
+if ! test -f $in
+then
+    echo "$in does not exist" >&2
+    exit 1
+fi
+
+chosenfile=""
+foundname="n"
+for n in $(seq 10000)
+do
+    paddedn=$(printf "%05d" "$n")
+    chosenfile="./tests/single-exec/$paddedn.c"
+
+    if test -f "$chosenfile" 
+    then
+        continue
+    fi
+
+    foundname="y"
+    break
+done
+
+if test "$foundname" = "n"
+then
+    echo "no numbers left."  >&2
+    exit 1
+fi
+
+
+cat $in > "$chosenfile"
+added="y"
+tagfile="$chosenfile.tags"
+
+echo "inferring tags..." 1>&2
+
+echo "portable" > $tagfile
+
+# Check for cstd
+if gcc --std=c89 -o /tmp/ctestsuite-infer.o $in
+then
+    echo "c89" >> $tagfile
+elif gcc --std=c99 -o /tmp/ctestsuite-infer.o $in
+then
+    echo "c99" >> $tagfile
+elif gcc --std=c11 -o /tmp/ctestsuite-infer.o $in
+then
+    echo "c11" >> $tagfile
+else
+    echo "unable to guess c std"
+fi 
+
+if grep -q -e "#include" "$in"
+then
+    # Since these are single file tests, the only
+    # thing we could include would be libc headers. 
+    echo "needs-libc" >> $tagfile
+fi
+
+if grep -q -e "#include" -e "#define" -e "#if" -e "#ifdef" "$in"
+then
+    echo "needs-cpp" >> $tagfile
+fi
+
+echo "$chosenfile"

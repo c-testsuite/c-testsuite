@@ -1,0 +1,36 @@
+#! /bin/sh
+
+set -e
+set -u
+
+if ! test "x86_64" = "$(uname -m)"
+then
+    echo "incorrect host for test" 1>&2
+    exit 1
+fi
+
+t=$1
+
+cat $t
+
+set -x
+
+if ! 9cc "$t" > "$t.s"
+then
+    exit 1
+fi
+
+if ! gcc -o "$t.bin" "$t.s"
+then
+    exit 1
+fi
+
+if ! "$t.bin" > "$t.output" 2>&1
+then
+    exit 1
+fi
+
+if ! diff -u "$t.expected" "$t.output"
+then
+    exit 1
+fi

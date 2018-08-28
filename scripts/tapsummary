@@ -28,7 +28,6 @@ for l in sys.stdin:
             skipped += 1
         else:
             passed += 1
-        o(l)
         tfailed=False
     elif l.startswith('1..'):
         ntests = int(l[3:])
