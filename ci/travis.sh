@@ -48,11 +48,17 @@ nix-env -i go
 # remove all the travis ci preset variables.
 # they just break everything go related.
 unset $(go env | cut  -f 1-1 -d'=')
+export GOPATH=$HOME
 go env
 go get -v -u github.com/cznic/ccgo/v2/...
 go get -v -u github.com/cznic/crt
 export PATH=$HOME/go/bin:$PATH
 (cd $HOME/go/src/github.com/cznic/ccgo/ && git rev-parse HEAD) > ccgo_version.txt
+
+# install c2go
+
+go get -v -u github.com/elliotchance/c2go
+(cd $HOME/go/src/ github.com/elliotchance/c2go/ && git rev-parse HEAD) > c2go_version.txt
 
 # install tcc
 nix-env -i tcc
@@ -90,6 +96,9 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <a href="https://github.com/cznic/ccgo/tree/master/v2">ccgo</a>
 <a href="/ccgo_report.html">test report</a>
 <br>
+<a href="https://github.com/elliotchance/c2go">ccgo</a>
+<a href="/c2go_report.html">test report</a>
+<br>
 <a href="https://clang.llvm.org/">clang</a>
 <a href="/clang-x86_64_report.html">test report</a>
 <br>
@@ -111,7 +120,7 @@ last updated: $testrundate
 </html>
 EOF
 
-for compiler in 9cc-x86_64 ccgo gcc-x86_64 clang-x86_64 tcc-x86_64 compcert-x86_64
+for compiler in 9cc-x86_64 ccgo c2go gcc-x86_64 clang-x86_64 tcc-x86_64 compcert-x86_64
 do
     htmlfile="./output_html/${compiler}_report.html"
 

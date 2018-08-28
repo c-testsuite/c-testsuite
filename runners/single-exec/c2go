@@ -1,0 +1,26 @@
+#! /bin/sh
+
+set -e
+set -u
+
+
+t=$1
+
+cat $t
+
+set -x
+
+if ! c2go transpile -o "$t.go" "$t"
+then
+    exit 1
+fi
+
+if ! go run "$t.go" > "$t.output" 2>&1
+then
+    exit 1
+fi
+
+if ! diff -u "$t.expected" "$t.output"
+then
+    exit 1
+fi
