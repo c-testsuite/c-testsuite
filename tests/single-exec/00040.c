@@ -1,4 +1,4 @@
-int *calloc(int, int);
+#include <stdlib.h>
 
 int N;
 int *t;
