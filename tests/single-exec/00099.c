@@ -1,6 +1,5 @@
-// This wouldn't compile
 
-typedef struct  { } Vec;
+typedef struct  { int n; } Vec;
 
 static void
 vecresize(Vec *v, int cap)
