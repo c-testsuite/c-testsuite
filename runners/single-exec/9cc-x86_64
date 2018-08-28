@@ -25,7 +25,7 @@ then
     exit 1
 fi
 
-if ! "$t.bin" > "t.output" 2>&1
+if ! "$t.bin" > "$t.output" 2>&1
 then
     exit 1
 fi
