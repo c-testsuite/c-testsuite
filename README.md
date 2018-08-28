@@ -101,10 +101,10 @@ $ ./scripts/search-tests "c99 suite=single-exec (portable or arch-amd64)"
 
 These queries can be used to generate skip lists.
 
-# otag files
+# otags files
 
 otag files are intended to allow
-a tests origin to be discovered.
+a tests origin to be discovered. They contain the following fields.
 
 ```
 org=$DOMAINNAME
