@@ -96,7 +96,7 @@ See <a href="https://github.com/c-testsuite/c-testsuite">here</a> for more info.
 <a href="https://github.com/cznic/ccgo/tree/master/v2">ccgo</a>
 <a href="/ccgo_report.html">test report</a>
 <br>
-<a href="https://github.com/elliotchance/c2go">ccgo</a>
+<a href="https://github.com/elliotchance/c2go">c2go</a>
 <a href="/c2go_report.html">test report</a>
 <br>
 <a href="https://clang.llvm.org/">clang</a>
