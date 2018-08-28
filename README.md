@@ -148,6 +148,6 @@ name it something like ```c-testsuite/$CTESTGITCOMMIT/path/to/test```.
 
 For example:
 
-- https://c-testsuite.github.io/gcc_report.html
-- https://c-testsuite.github.io/gcc-single-exec_report.tap
-- https://c-testsuite.github.io/gcc-single-exec_report.tap.txt
+- https://c-testsuite.github.io/gcc-x86_64_report.html
+- https://c-testsuite.github.io/gcc-x86_64-single-exec_report.tap
+- https://c-testsuite.github.io/gcc-x86_64-single-exec_report.tap.txt
