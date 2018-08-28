@@ -96,7 +96,7 @@ c99 implies c11
 example query:
 ```
 $ ./scripts/make-search-index
-$ ./scripts/search-tests "c99 suite=single-exec (arch=portable or arch=amd64)"
+$ ./scripts/search-tests "c99 suite=single-exec (portable or arch-amd64)"
 ```
 
 These queries can be used to generate skip lists.
