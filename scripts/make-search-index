@@ -16,7 +16,7 @@ fi
 
 tmsu init
 
-tmsu tag -c arch =x86_64 =portable \
+tmsu tag -c arch-x86_64 portable \
   needs-cpp needs-libc
 tmsu imply c89 c99
 tmsu imply c99 c11

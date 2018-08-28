@@ -1,0 +1,17 @@
+#! /bin/sh
+
+set -e
+set -u
+
+if ! test "x86_64" = "$(uname -m)"
+then
+    echo "incorrect host for test" 1>&2
+    exit 1
+fi
+
+CC=clang
+# A typical configuration
+CFLAGS="-nolibc --std=c11 -O2"
+
+export CC CFLAGS
+exec ./runners/single-exec/posix $1
