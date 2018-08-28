@@ -48,7 +48,7 @@ nix-env -i go
 # remove all the travis ci preset variables.
 # they just break everything go related.
 unset $(go env | cut  -f 1-1 -d'=')
-export GOPATH=$HOME
+export GOPATH=$HOME/go
 go env
 go get -v -u github.com/cznic/ccgo/v2/...
 go get -v -u github.com/cznic/crt
