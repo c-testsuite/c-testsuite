@@ -10,7 +10,7 @@ then
 fi
 
 CC=ccomp
-CFLAGS="-fstruct-passing -O2"
+CFLAGS="-fall -O2"
 
 export CC CFLAGS
 exec ./runners/single-exec/posix $1
