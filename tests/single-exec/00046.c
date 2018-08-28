@@ -5,7 +5,6 @@ typedef struct {
 		int b2;
 	};
 	struct { union { struct { int c; }; struct {}; }; };
-	struct {};
 	struct {
 		int d;
 	};
