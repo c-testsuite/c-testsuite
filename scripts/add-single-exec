@@ -50,13 +50,13 @@ echo "inferring tags..." 1>&2
 echo "portable" > $tagfile
 
 # Check for cstd
-if gcc --std=c89 -o /tmp/ctestsuite-infer.o $in
+if gcc -pedantic --std=c89 -c -o /tmp/ctestsuite-infer.o $in
 then
     echo "c89" >> $tagfile
-elif gcc --std=c99 -o /tmp/ctestsuite-infer.o $in
+elif gcc -pedantic --std=c99 -c -o /tmp/ctestsuite-infer.o $in
 then
     echo "c99" >> $tagfile
-elif gcc --std=c11 -o /tmp/ctestsuite-infer.o $in
+elif gcc -pedantic --std=c11 -c -o /tmp/ctestsuite-infer.o $in
 then
     echo "c11" >> $tagfile
 else
