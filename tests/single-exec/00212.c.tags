@@ -1,4 +1,3 @@
-portable
-c89
+c99
 needs-libc
 needs-cpp
