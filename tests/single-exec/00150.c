@@ -7,7 +7,7 @@ struct S2 {
 	struct S1 *ps1;
 	int arr[2];
 };
-struct S1 gs1 = (struct S1) {.a = 1, 2};
+struct S1 gs1 = { .a = 1, 2 };
 struct S2 *s = &(struct S2) {
 	{.b = 2, .a = 1},
 	&gs1,
