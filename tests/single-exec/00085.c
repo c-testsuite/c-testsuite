@@ -13,13 +13,9 @@ main()
 		return 1;
 	if (ZERO_2(1, 2))
 		return 1;
-	if (ZERO_VAR())
-		return 1;
 	if (ZERO_VAR(1))
 		return 1;
 	if (ZERO_VAR(1, 2))
-		return 1;
-	if (ZERO_1_VAR(1))
 		return 1;
 	if (ZERO_1_VAR(1, 2))
 		return 1;
