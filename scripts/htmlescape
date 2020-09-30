@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 
 import sys, html
+#Importing Function sys and html
 
 for l in sys.stdin:
    print(html.escape(l), end='')
+   
