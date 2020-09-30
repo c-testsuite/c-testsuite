@@ -6,7 +6,11 @@ the various test suites here adhere to well defined, simple interfaces and proje
 tests back that match those interfaces, or use those tests by implementing runner scripts matching
 the specifications.
 
-There are many tools that may benefit such as C compilers, transpilers, interpreters and emulators, so we should seek to agree on simple easy test interfaces, and implement
+There are a number of tools, which include
+1. C compilers,
+2. Transpilers, 
+3. Interpreters and emulators.
+so we should seek to agree on simple easy test interfaces, and implement
 those interfaces for a variety of tools.
 
 results are published daily to https://c-testsuite.github.io/
