@@ -6,7 +6,7 @@
 int
 main(void)
 {
-	int foo, bar, foobar;
+	int foo = 0, bar = 0, foobar;
 
 	CAT(foo,bar) = foo + bar;
 	XCAT(FOO,BAR) = foo + bar;
